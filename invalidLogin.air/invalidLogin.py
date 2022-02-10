@@ -1,6 +1,7 @@
 # -*- encoding=utf8 -*-
 __author__ = "sampadrout"
 
+from readline import get_current_history_length
 from airtest.core.api import *
 from airtest.report.report import *
 from tqdm import tqdm
@@ -16,7 +17,8 @@ PWD = os.path.dirname(__file__)
 PKG = "com.gsn.worldwinner"
 
 APK_URL = 'https://cdn.skillprod.worldwinner.com/AppPackages/Android/WorldWinner.apk'
-APK = PWD+'app/WorldWinner.apk'
+APK = os.getcwd+'app/WorldWinner.apk'
+print("File Path -- " + APK)
 # stream true is required
 response = requests.get(APK_URL, stream=True)
 # total file size
