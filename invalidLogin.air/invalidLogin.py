@@ -17,7 +17,7 @@ print("PWD Path -- " + PWD)
 PKG = "com.gsn.worldwinner"
 
 APK_URL = 'https://cdn.skillprod.worldwinner.com/AppPackages/Android/WorldWinner.apk'
-APK = PWD+'app/WorldWinner.apk'
+APK = '/Users/runner/work/airtest-demo/app/WorldWinner.apk'
 print("File Path -- " + APK)
 
 # stream true is required
