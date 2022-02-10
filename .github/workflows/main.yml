@@ -57,6 +57,4 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
-          script: echo "Generated AVD snapshot for caching."
-      - name: Run tests with pytest
-        run: python -m airtest run "invalidLogin.air" --device Android:///
+          script: python -m airtest run "invalidLogin.air" --device Android:///
