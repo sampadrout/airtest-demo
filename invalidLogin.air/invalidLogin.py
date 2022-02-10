@@ -3,29 +3,40 @@ __author__ = "sampadrout"
 
 from airtest.core.api import *
 from airtest.report.report import *
-import os
+from tqdm import tqdm
 import requests
+import os
 
 ST.LOG_FILE = "log.txt"
-set_logdir(r'invalidLogin.air/log')
+set_logdir(r'/Users/sampadrout/Downloads/invalidLogin.air/log')
 
 auto_setup(__file__)
 
 PWD = os.path.dirname(__file__)
 PKG = "com.gsn.worldwinner"
 
-APK_URL = "https://cdn.skillprod.worldwinner.com/AppPackages/Android/WorldWinner.apk"
-APK_FILE = 'WorldWinner.apk'
-requests.urlretrieve(APK_URL, APK_FILE)
-
-APK = os.path.join(PWD, APK_FILE)
+APK_URL = 'https://cdn.skillprod.worldwinner.com/AppPackages/Android/WorldWinner.apk'
+APK = PWD+'/app/WorldWinner.apk'
+# stream true is required
+response = requests.get(APK_URL, stream=True)
+# total file size
+t = int(response.headers.get('content-length', 0))
+block_size = 1024**2 #1 Mbit
+progress_bar = tqdm(total=t, unit='iB', unit_scale=True)
+with open(APK, 'wb') as file:
+    for data in response.iter_content(block_size):
+        progress_bar.update(len(data))
+        file.write(data)
+progress_bar.close()
+if ( t != 0 ) and ( progress_bar.n != t ) : print("ERROR downloading file!")
 
 if PKG not in device().list_app():
-    install(APK_FILE)
+    install(APK)
 else:
 	stop_app("com.gsn.worldwinner")
-
-clear_app("com.gsn.worldwinner")
+	clear_app("com.gsn.worldwinner")
+	uninstall("com.gsn.worldwinner")
+	install(APK)
 
 start_app("com.gsn.worldwinner")
 sleep(120.0)
@@ -57,4 +68,4 @@ stop_app("com.gsn.worldwinner")
 clear_app("com.gsn.worldwinner")
 uninstall("com.gsn.worldwinner")
 
-simple_report(__file__,logpath=True,logfile=r"invalidLogin.air/log/log.txt",output=r"invalidLogin.air/log/report.html")
+simple_report(__file__,logpath=True,logfile=r"/Users/sampadrout/Downloads/invalidLogin.air/log/log.txt",output=r"/Users/sampadrout/Downloads/invalidLogin.air/log/report.html")
