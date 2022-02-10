@@ -16,7 +16,7 @@ PWD = os.path.dirname(__file__)
 PKG = "com.gsn.worldwinner"
 
 APK_URL = 'https://cdn.skillprod.worldwinner.com/AppPackages/Android/WorldWinner.apk'
-APK = PWD+'/app/WorldWinner.apk'
+APK = 'app/WorldWinner.apk'
 # stream true is required
 response = requests.get(APK_URL, stream=True)
 # total file size
