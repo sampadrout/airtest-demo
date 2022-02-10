@@ -8,7 +8,7 @@ import requests
 import os
 
 ST.LOG_FILE = "log.txt"
-set_logdir(r'/Users/sampadrout/Downloads/invalidLogin.air/log')
+set_logdir(r'log')
 
 auto_setup(__file__)
 
@@ -68,4 +68,4 @@ stop_app("com.gsn.worldwinner")
 clear_app("com.gsn.worldwinner")
 uninstall("com.gsn.worldwinner")
 
-simple_report(__file__,logpath=True,logfile=r"/Users/sampadrout/Downloads/invalidLogin.air/log/log.txt",output=r"/Users/sampadrout/Downloads/invalidLogin.air/log/report.html")
+simple_report(__file__,logpath=True,logfile=r"log/log.txt",output=r"log/report.html")
